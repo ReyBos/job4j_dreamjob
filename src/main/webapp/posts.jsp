@@ -40,7 +40,7 @@
                     </thead>
                     <tbody>
                     <% DateFormat df = new SimpleDateFormat("dd MMM yyy"); %>
-                    <% for (Post post : Store.instOf().findAll()) { %>
+                    <% for (Post post : Store.instOf().findAllPosts()) { %>
                         <tr>
                             <td><%=post.getName()%></td>
                             <td><%=post.getDescription()%></td>
