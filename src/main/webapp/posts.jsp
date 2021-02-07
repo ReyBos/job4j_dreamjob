@@ -13,6 +13,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -33,6 +34,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th></th>
                             <th scope="col">Объявления</th>
                             <th scope="col">Описание</th>
                             <th scope="col">Дата создания</th>
@@ -42,6 +44,11 @@
                     <% DateFormat df = new SimpleDateFormat("dd MMM yyy"); %>
                     <% for (Post post : Store.instOf().findAllPosts()) { %>
                         <tr>
+                            <td>
+                                <a href="<%=request.getContextPath()%>/post/edit.jsp?id=<%=post.getId()%>">
+                                    <i class="fa fa-edit mr-3"></i>
+                                </a>
+                            </td>
                             <td><%=post.getName()%></td>
                             <td><%=post.getDescription()%></td>
                             <td><%=df.format(post.getCreated().getTime())%></td>
