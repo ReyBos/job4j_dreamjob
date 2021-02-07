@@ -25,25 +25,14 @@
 <body>
     <div class="container">
         <div class="row">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Объявления</th>
-                        <th scope="col">Описание</th>
-                        <th scope="col">Дата создания</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <% DateFormat df = new SimpleDateFormat("dd MMM yyy"); %>
-                <% for (Post post : Store.instOf().findAllPosts()) { %>
-                    <tr>
-                        <td><%=post.getName()%></td>
-                        <td><%=post.getDescription()%></td>
-                        <td><%=df.format(post.getCreated().getTime())%></td>
-                    </tr>
-                <% } %>
-                </tbody>
-            </table>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
+                </li>
+            </ul>
         </div>
     </div>
 </body>
