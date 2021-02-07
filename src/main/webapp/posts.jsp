@@ -23,28 +23,35 @@
     <title>Dream Job!</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Объявления</th>
-                        <th scope="col">Описание</th>
-                        <th scope="col">Дата создания</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <% DateFormat df = new SimpleDateFormat("dd MMM yyy"); %>
-                <% for (Post post : Store.instOf().findAll()) { %>
-                    <tr>
-                        <td><%=post.getName()%></td>
-                        <td><%=post.getDescription()%></td>
-                        <td><%=df.format(post.getCreated().getTime())%></td>
-                    </tr>
-                <% } %>
-                </tbody>
-            </table>
+<div class="container pt-3">
+    <div class="row">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Вакансии
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Объявления</th>
+                            <th scope="col">Описание</th>
+                            <th scope="col">Дата создания</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% DateFormat df = new SimpleDateFormat("dd MMM yyy"); %>
+                    <% for (Post post : Store.instOf().findAll()) { %>
+                        <tr>
+                            <td><%=post.getName()%></td>
+                            <td><%=post.getDescription()%></td>
+                            <td><%=df.format(post.getCreated().getTime())%></td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+</div>
 </body>
 </html>
