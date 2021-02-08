@@ -21,18 +21,12 @@
     <title>Dream Job!</title>
 </head>
 <body>
-<%
-    String id = request.getParameter("id");
-    Post post = new Post(0, "", "", null);
-    if (id != null) {
-        post = Store.instOf().findPostById(Integer.parseInt(id));
-    }
-%>
+<% Post post = (Post) request.getAttribute("post"); %>
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <% if (id == null) { %>
+                <% if (post.getId() == 0) { %>
                 Новая вакансия.
                 <% } else { %>
                 Редактирование вакансии.

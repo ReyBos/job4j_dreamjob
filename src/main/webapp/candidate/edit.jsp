@@ -1,5 +1,4 @@
 <%@ page import="ru.job4j.dream.model.Candidate" %>
-<%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!doctype html>
 <html lang="ru">
@@ -21,18 +20,12 @@
     <title>Dream Job!</title>
 </head>
 <body>
-<%
-    String id = request.getParameter("id");
-    Candidate candidate = new Candidate(0, "");
-    if (id != null) {
-        candidate = Store.instOf().findCandidateById(Integer.parseInt(id));
-    }
-%>
+<% Candidate candidate = (Candidate) request.getAttribute("candidate"); %>
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <% if (id == null) { %>
+                <% if (candidate.getId() == 0) { %>
                 Новый кандидат.
                 <% } else { %>
                 Редактирование кандидата.

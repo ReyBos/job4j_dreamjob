@@ -1,8 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.dream.store.Store" %>
-<%@ page import="ru.job4j.dream.model.Post" %>
-<%@ page import="java.text.DateFormat" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -27,16 +23,16 @@
         <div class="row">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post.do">Вакансии</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate.do">Кандидаты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.do">Добавить вакансию</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.do">Добавить кандидата</a>
                 </li>
             </ul>
         </div>
