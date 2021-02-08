@@ -1,5 +1,4 @@
-<%@ page import="ru.job4j.dream.store.Store" %>
-<%@ page import="ru.job4j.dream.model.Post" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!doctype html>
 <html lang="ru">
@@ -21,26 +20,29 @@
     <title>Dream Job!</title>
 </head>
 <body>
-<% Post post = (Post) request.getAttribute("post"); %>
 <div class="container pt-3">
     <div class="row">
+        <%@ include file="../_menu.jsp" %>
+    </div>
+    <div class="row pt-3">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <% if (post.getId() == 0) { %>
-                Новая вакансия.
-                <% } else { %>
-                Редактирование вакансии.
-                <% } %>
+                <c:if test="${post.id == 0}">
+                    Новая вакансия.
+                </c:if>
+                <c:if test="${post.id != 0}">
+                    Редактирование вакансии.
+                </c:if>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/post/save?id=<%=post.getId()%>" method="post">
+                <form action="<%=request.getContextPath()%>/post/save?id=<c:out value="${post.id}"/>" method="post">
                     <div class="form-group">
-                        <label>Имя</label>
-                        <input type="text" name="name" class="form-control" value="<%=post.getName()%>">
+                        <label>Название</label>
+                        <input type="text" name="name" class="form-control" value="<c:out value="${post.name}"/>">
                     </div>
                     <div class="form-group">
                         <label>Описание вакансии</label>
-                        <textarea name="description" class="form-control"><%=post.getDescription()%></textarea>
+                        <textarea name="description" class="form-control"><c:out value="${post.description}"/></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>

@@ -1,8 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.dream.model.Post" %>
-<%@ page import="java.text.DateFormat" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Collection" %>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -26,6 +23,9 @@
 <body>
 <div class="container pt-3">
     <div class="row">
+        <%@ include file="_menu.jsp" %>
+    </div>
+    <div class="row pt-3">
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Вакансии
@@ -41,19 +41,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <% DateFormat df = new SimpleDateFormat("dd MMM yyy"); %>
-                    <% for (Post post : (Collection<Post>) request.getAttribute("posts")) { %>
+                    <c:forEach var="post" items="${posts}">
                         <tr>
                             <td>
-                                <a href="<%=request.getContextPath()%>/post/edit.do?id=<%=post.getId()%>">
+                                <a href='<c:url value="/post/edit.do?id=${post.id}"/>'>
                                     <i class="fa fa-edit mr-3"></i>
                                 </a>
                             </td>
-                            <td><%=post.getName()%></td>
-                            <td><%=post.getDescription()%></td>
-                            <td><%=df.format(post.getCreated().getTime())%></td>
+                            <td><c:out value="${post.name}"/></td>
+                            <td><c:out value="${post.description}"/></td>
+                            <td><c:out value="${post.formattedCreated}"/></td>
                         </tr>
-                    <% } %>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

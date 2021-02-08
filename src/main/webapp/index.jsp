@@ -19,24 +19,11 @@
     <title>Dream Job!</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container pt-3">
         <div class="row">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/post.do">Вакансии</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate.do">Кандидаты</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.do">Добавить вакансию</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.do">Добавить кандидата</a>
-                </li>
-            </ul>
+            <%@ include file="_menu.jsp" %>
         </div>
-        <div class="row">
+        <div class="row pt-3">
             <div class="card" style="width: 100%">
                 <div class="card-header">
                     Сегодняшние вакансии.

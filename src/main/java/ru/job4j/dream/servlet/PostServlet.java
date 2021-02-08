@@ -1,6 +1,5 @@
 package ru.job4j.dream.servlet;
 
-import ru.job4j.dream.model.Post;
 import ru.job4j.dream.store.Store;
 
 import javax.servlet.ServletException;

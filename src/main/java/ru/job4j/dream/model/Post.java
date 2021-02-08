@@ -1,5 +1,7 @@
 package ru.job4j.dream.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -30,6 +32,11 @@ public class Post {
 
     public Calendar getCreated() {
         return created;
+    }
+
+    public String getFormattedCreated() {
+        DateFormat df = new SimpleDateFormat("dd MMM yyy");
+        return df.format(created.getTime());
     }
 
     public void setId(int id) {
