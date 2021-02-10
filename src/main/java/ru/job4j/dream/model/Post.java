@@ -3,6 +3,7 @@ package ru.job4j.dream.model;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class Post {
@@ -10,6 +11,20 @@ public class Post {
     private String name;
     private String description;
     private Calendar created;
+
+    public Post() {
+        this.id = 0;
+        this.name = "";
+        this.description = "";
+        this.created = new GregorianCalendar();
+    }
+
+    public Post(int id) {
+        this.id = id;
+        this.name = "";
+        this.description = "";
+        this.created = new GregorianCalendar();
+    }
 
     public Post(int id, String name, String description, Calendar created) {
         this.id = id;
@@ -70,5 +85,14 @@ public class Post {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Post{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", description='" + description + '\''
+                + "}";
     }
 }

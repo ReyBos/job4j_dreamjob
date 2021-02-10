@@ -6,6 +6,16 @@ public class Candidate {
     private int id;
     private String name;
 
+    public Candidate() {
+        this.id = 0;
+        this.name = "";
+    }
+
+    public Candidate(int id) {
+        this.id = id;
+        this.name = "";
+    }
+
     public Candidate(int id, String name) {
         this.id = id;
         this.name = name;
@@ -43,5 +53,13 @@ public class Candidate {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    @Override
+    public String toString() {
+        return "Candidate{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + "}";
     }
 }

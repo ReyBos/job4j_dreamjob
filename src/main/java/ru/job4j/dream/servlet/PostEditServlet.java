@@ -1,7 +1,7 @@
 package ru.job4j.dream.servlet;
 
 import ru.job4j.dream.model.Post;
-import ru.job4j.dream.store.Store;
+import ru.job4j.dream.store.MemStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +17,7 @@ public class PostEditServlet extends HttpServlet {
         String id = req.getParameter("id");
         Post post = new Post(0, "", "", null);
         if (id != null) {
-            post = Store.instOf().findPostById(Integer.parseInt(id));
+            post = MemStore.instOf().findPostById(Integer.parseInt(id));
         }
         req.setAttribute("post", post);
         req.getRequestDispatcher("edit.jsp").forward(req, resp);
@@ -27,7 +27,7 @@ public class PostEditServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        Store.instOf().save(new Post(
+        MemStore.instOf().save(new Post(
                 Integer.parseInt(req.getParameter("id")),
                 req.getParameter("name"),
                 req.getParameter("description"),
