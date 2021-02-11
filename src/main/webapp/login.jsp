@@ -21,8 +21,10 @@
 </head>
 <body>
 <div class="container pt-3">
-
     <div class="row">
+        <%@ include file="_menu.jsp" %>
+    </div>
+    <div class="row pt-3">
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Авторизация
@@ -38,11 +40,11 @@
                         <input type="text" class="form-control" name="password">
                     </div>
                     <button type="submit" class="btn btn-primary">Войти</button>
-                    <div class="alert alert-danger mt-4" role="alert">
-                        <c:if test="${not empty error}">
+                    <c:if test="${not empty error}">
+                        <div class="alert alert-danger mt-4" role="alert">
                             <c:out value="${error}"/>
-                        </c:if>
-                    </div>
+                        </div>
+                    </c:if>
                 </form>
             </div>
         </div>
