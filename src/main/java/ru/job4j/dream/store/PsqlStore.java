@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.commons.dbcp2.BasicDataSource;
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.Photo;
 import ru.job4j.dream.model.Post;
 
 import java.io.InputStream;
@@ -93,7 +94,8 @@ public class PsqlStore implements Store {
     @Override
     public Collection<Candidate> findAllCandidates() {
         Candidate searchedCandidate = new Candidate();
-        String sql = "select * from candidate";
+        String sql = "SELECT candidate.*, photo.id AS photo_name FROM candidate "
+                + " LEFT JOIN photo ON candidate.id = photo.candidate_id";
         BiConsumerException<PreparedStatement, Candidate> setValues = (statement, candidate) -> { };
         return searchCandidate(searchedCandidate, sql, setValues);
     }
@@ -101,7 +103,8 @@ public class PsqlStore implements Store {
     @Override
     public Candidate findCandidateById(int id) {
         Candidate searchedCandidate = new Candidate(id);
-        String sql = "select * from candidate where id = ?";
+        String sql = "SELECT candidate.*, photo.id AS photo_name FROM candidate "
+                + " LEFT JOIN photo ON candidate.id = photo.candidate_id WHERE candidate.id = ?";
         BiConsumerException<PreparedStatement, Candidate> setValues = (statement, candidate) -> {
             statement.setInt(1, candidate.getId());
         };
@@ -122,7 +125,9 @@ public class PsqlStore implements Store {
             try (ResultSet resultSet = ps.executeQuery()) {
                 while (resultSet.next()) {
                     candidates.add(new Candidate(
-                            resultSet.getInt("id"), resultSet.getString("name")
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getString("photo_name")
                     ));
                 }
             }
@@ -183,6 +188,43 @@ public class PsqlStore implements Store {
             create(candidate);
         } else {
             update(candidate);
+        }
+    }
+
+    @Override
+    public void delete(Candidate candidate) {
+        if (candidate.getId() == 0) {
+            return;
+        }
+        String sql = "delete from candidate where id = ?";
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement(sql)
+        ) {
+            ps.setInt(1, candidate.getId());
+            ps.execute();
+        } catch (Exception e) {
+            LOG.error("Error", e);
+        }
+    }
+
+    @Override
+    public void save(Photo photo) {
+        String sql = "insert into photo(name, candidate_id) values (?, ?)";
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement(
+                     sql, PreparedStatement.RETURN_GENERATED_KEYS
+             )
+        ) {
+            ps.setString(1, photo.getName());
+            ps.setInt(2, photo.getCandidateId());
+            ps.execute();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    photo.setId(id.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error("Error", e);
         }
     }
 

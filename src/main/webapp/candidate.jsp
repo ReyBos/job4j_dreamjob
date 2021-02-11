@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.dream.model.Candidate" %>
-<%@ page import="java.util.Collection" %>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -37,7 +35,9 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th scope="col">Имена</th>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Фото</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,6 +49,18 @@
                                 </a>
                             </td>
                             <td><c:out value="${candidate.name}"/></td>
+                            <td>
+                                <c:if test="${not empty candidate.photoName}">
+                                <a href="<c:url value='/candidate/photo?name=${candidate.photoName}'/>">
+                                    <img src="<c:url value='/candidate/photo?name=${candidate.photoName}'/>" width="100px" height="100px"/>
+                                </a>
+                                </c:if>
+                            </td>
+                            <td>
+                                <a href='<c:url value="/candidate/delete?id=${candidate.id}"/>'>
+                                    <i class="fa fa-trash mr-3"></i>
+                                </a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

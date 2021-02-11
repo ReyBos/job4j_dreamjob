@@ -34,14 +34,31 @@
                     Редактирование кандидата.
                 </c:if>
             </div>
-            <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidate/save?id=<c:out value="${candidate.id}"/>" method="post">
-                    <div class="form-group">
-                        <label>Имя</label>
-                        <input type="text" name="name" class="form-control" value="<c:out value="${candidate.name}"/>">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
-                </form>
+            <div class="card-body row">
+                <div class="col-5">
+
+                    <form action="<c:url value='/candidate/save?id=${candidate.id}'/>" method="post">
+                        <div class="form-group">
+                            <label>Имя</label>
+                            <input type="text" name="name" class="form-control" value="<c:out value="${candidate.name}"/>">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </form>
+                </div>
+                <div class="col-5">
+                    <c:if test="${not empty candidate.photoName}">
+                        <img src="<c:url value='/candidate/photo?name=${candidate.photoName}'/>" width="100px" height="100px"/>
+                    </c:if>
+                    <c:if test="${empty candidate.photoName}">
+                        <form action="<c:url value='/candidate/photo?id=${candidate.id}'/>" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label>Фото</label>
+                                <input type="file" name="file" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </form>
+                    </c:if>
+                </div>
             </div>
         </div>
     </div>

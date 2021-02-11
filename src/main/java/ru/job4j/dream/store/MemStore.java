@@ -1,6 +1,7 @@
 package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.Photo;
 import ru.job4j.dream.model.Post;
 
 import java.util.Collection;
@@ -15,6 +16,7 @@ public class MemStore implements Store {
     private final static AtomicInteger CANDIDATE_ID = new AtomicInteger(4);
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
+    private final Map<Integer, Photo> photos = new ConcurrentHashMap<>();
 
     private MemStore() {
         posts.put(1, new Post(
@@ -59,6 +61,19 @@ public class MemStore implements Store {
             candidate.setId(CANDIDATE_ID.incrementAndGet());
         }
         candidates.put(candidate.getId(), candidate);
+    }
+
+    @Override
+    public void delete(Candidate candidate) {
+        candidates.remove(candidate.getId());
+    }
+
+    @Override
+    public void save(Photo photo) {
+        if (photo.getId() == 0) {
+            photo.setId(POST_ID.incrementAndGet());
+        }
+        photos.put(photo.getId(), photo);
     }
 
     @Override

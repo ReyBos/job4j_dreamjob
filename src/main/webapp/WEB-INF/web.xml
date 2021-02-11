@@ -25,6 +25,19 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>PostEditServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.PostEditServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostEditServlet</servlet-name>
+    <url-pattern>/post/save</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PostEditServlet</servlet-name>
+    <url-pattern>/post/edit.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>CandidateServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.CandidateServlet</servlet-class>
   </servlet>
@@ -47,16 +60,21 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>PostEditServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlet.PostEditServlet</servlet-class>
+    <servlet-name>CandidateDeleteServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.CandidateDeleteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>PostEditServlet</servlet-name>
-    <url-pattern>/post/save</url-pattern>
+    <servlet-name>CandidateDeleteServlet</servlet-name>
+    <url-pattern>/candidate/delete</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CandidatePhotoServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.CandidatePhotoServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
-    <servlet-name>PostEditServlet</servlet-name>
-    <url-pattern>/post/edit.do</url-pattern>
+    <servlet-name>CandidatePhotoServlet</servlet-name>
+    <url-pattern>/candidate/photo</url-pattern>
   </servlet-mapping>
 
 </web-app>
