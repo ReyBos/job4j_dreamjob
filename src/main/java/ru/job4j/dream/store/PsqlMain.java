@@ -2,6 +2,7 @@ package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.model.User;
 
 import java.util.GregorianCalendar;
 
@@ -31,5 +32,13 @@ public class PsqlMain {
         candidate1.setName("Artem");
         store.save(candidate1);
         System.out.println(store.findCandidateById(candidate1.getId()));
+        System.out.println("-----------------");
+        User user = new User(0, "Andrew", "email", "12345");
+        store.save(user);
+        System.out.println(store.findUserById(user.getId()));
+        for (User item : store.findAllUsers()) {
+            System.out.println(item);
+        }
+        store.delete(user);
     }
 }

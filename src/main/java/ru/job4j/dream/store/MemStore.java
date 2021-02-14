@@ -3,6 +3,7 @@ package ru.job4j.dream.store;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Photo;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.model.User;
 
 import java.util.Collection;
 import java.util.GregorianCalendar;
@@ -14,9 +15,12 @@ public class MemStore implements Store {
     private static final MemStore INST = new MemStore();
     private final static AtomicInteger POST_ID = new AtomicInteger(4);
     private final static AtomicInteger CANDIDATE_ID = new AtomicInteger(4);
+    private final static AtomicInteger PHOTO_ID = new AtomicInteger(0);
+    private final static AtomicInteger USER_ID = new AtomicInteger(0);
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
     private final Map<Integer, Photo> photos = new ConcurrentHashMap<>();
+    private final Map<Integer, User> users = new ConcurrentHashMap<>();
 
     private MemStore() {
         posts.put(1, new Post(
@@ -48,6 +52,11 @@ public class MemStore implements Store {
     }
 
     @Override
+    public Collection<User> findAllUsers() {
+        return users.values();
+    }
+
+    @Override
     public void save(Post post) {
         if (post.getId() == 0) {
             post.setId(POST_ID.incrementAndGet());
@@ -71,9 +80,22 @@ public class MemStore implements Store {
     @Override
     public void save(Photo photo) {
         if (photo.getId() == 0) {
-            photo.setId(POST_ID.incrementAndGet());
+            photo.setId(PHOTO_ID.incrementAndGet());
         }
         photos.put(photo.getId(), photo);
+    }
+
+    @Override
+    public void save(User user) {
+        if (user.getId() == 0) {
+            user.setId(USER_ID.incrementAndGet());
+        }
+        users.put(user.getId(), user);
+    }
+
+    @Override
+    public void delete(User user) {
+        users.remove(user.getId());
     }
 
     @Override
@@ -84,5 +106,10 @@ public class MemStore implements Store {
     @Override
     public Candidate findCandidateById(int id) {
         return candidates.get(id);
+    }
+
+    @Override
+    public User findUserById(int id) {
+        return users.get(id);
     }
 }

@@ -8,6 +8,21 @@ public class User {
     private String email;
     private String password;
 
+    public User() {
+        this.id = 0;
+    }
+
+    public User(int id) {
+        this.id = id;
+    }
+
+    public User(int id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
     public int getId() {
         return id;
     }
@@ -55,5 +70,15 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "User{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", email='" + email + '\''
+                + ", password='" + password + '\''
+                + "}";
     }
 }
