@@ -3,7 +3,10 @@
 <ul class="nav">
     <c:if test="${empty user}">
         <li class="nav-item">
-            <a class="nav-link" href='<c:url value="/auth.do" />'>Войти</a>
+            <a class="nav-link" href='<c:url value="/auth.do" />'>Авторизация</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href='<c:url value="/reg.do" />'>Регистрация</a>
         </li>
     </c:if>
     <c:if test="${not empty user}">
