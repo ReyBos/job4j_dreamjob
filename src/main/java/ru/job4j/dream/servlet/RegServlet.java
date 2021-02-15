@@ -26,20 +26,15 @@ public class RegServlet extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        if (name.equals("") || email.equals("") || password.equals("")) {
-            req.setAttribute("error", "Заполены не все поля формы");
+        User user = new User(0, name, email, password);
+        PsqlStore.instOf().save(user);
+        if (user.getId() == 0) {
+            req.setAttribute("error", "Ошибка сохранения пользователя");
             req.getRequestDispatcher("reg.jsp").forward(req, resp);
         } else {
-            User user = new User(0, name, email, password);
-            PsqlStore.instOf().save(user);
-            if (user.getId() == 0) {
-                req.setAttribute("error", "Ошибка сохранения пользователя");
-                req.getRequestDispatcher("reg.jsp").forward(req, resp);
-            } else {
-                HttpSession sc = req.getSession();
-                sc.setAttribute("user", user);
-                resp.sendRedirect(req.getContextPath() + "/post.do");
-            }
+            HttpSession sc = req.getSession();
+            sc.setAttribute("user", user);
+            resp.sendRedirect(req.getContextPath() + "/post.do");
         }
     }
 }
