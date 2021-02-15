@@ -31,4 +31,6 @@ public interface Store {
     Candidate findCandidateById(int id);
 
     User findUserById(int id);
+
+    User findUserByEmail(String email);
 }

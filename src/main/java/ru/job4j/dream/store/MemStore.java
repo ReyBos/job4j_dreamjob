@@ -112,4 +112,14 @@ public class MemStore implements Store {
     public User findUserById(int id) {
         return users.get(id);
     }
+
+    @Override
+    public User findUserByEmail(String email) {
+        for (User user : users.values()) {
+            if (user.getEmail().equals(email)) {
+                return user;
+            }
+        }
+        return null;
+    }
 }

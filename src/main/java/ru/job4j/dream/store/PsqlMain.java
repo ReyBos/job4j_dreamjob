@@ -36,6 +36,7 @@ public class PsqlMain {
         User user = new User(0, "Andrew", "email", "12345");
         store.save(user);
         System.out.println(store.findUserById(user.getId()));
+        System.out.println(store.findUserByEmail(user.getEmail()));
         for (User item : store.findAllUsers()) {
             System.out.println(item);
         }

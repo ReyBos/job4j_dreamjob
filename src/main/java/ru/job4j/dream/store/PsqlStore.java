@@ -157,6 +157,17 @@ public class PsqlStore implements Store {
         return rsl.size() == 0 ? null : rsl.get(0);
     }
 
+    @Override
+    public User findUserByEmail(String email) {
+        User searchedUser = new User(email);
+        String sql = "select * from users where email = ?";
+        BiConsumerException<PreparedStatement, User> setValues = (statement, user) -> {
+            statement.setString(1, user.getEmail());
+        };
+        List<User> rsl = searchUser(searchedUser, sql, setValues);
+        return rsl.size() == 0 ? null : rsl.get(0);
+    }
+
     private List<User> searchUser(
             User user, String sql, BiConsumerException<PreparedStatement, User> setValues
     ) {
