@@ -1,17 +1,11 @@
 package ru.job4j.dream.filter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import ru.job4j.dream.store.PsqlStore;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AuthFilter implements Filter {
-    private static final Logger LOG = LoggerFactory.getLogger(PsqlStore.class.getName());
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -22,7 +16,6 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) sreq;
         HttpServletResponse resp = (HttpServletResponse) sresp;
         String uri = req.getRequestURI();
-        LOG.debug("test");
         if (uri.endsWith("auth.do") || uri.endsWith("reg.do")) {
             chain.doFilter(sreq, sresp);
             return;
