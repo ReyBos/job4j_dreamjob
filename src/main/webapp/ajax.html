@@ -23,6 +23,20 @@
             alert(err);
         });
     }
+
+    function sendJson() {
+        let data = {name: $('#exampleInputEmail1').val()};
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/dreamjob/greet",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+        }).done(function(data) {
+            $(".result").text(data.answer);
+        }).fail(function(err){
+            alert(err);
+        });
+    }
 </script>
 
 <div class="container">
@@ -35,6 +49,7 @@
             <p class="result"></p>
         </div>
         <button type="button" class="btn btn-primary" onclick="sendGreeting()">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="sendJson()">JSON</button>
     </form>
 </div>
 </body>
