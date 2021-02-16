@@ -26,7 +26,9 @@
             <a class="nav-link" href='<c:url value="/candidate/edit.do" />'>Добавить кандидата</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/auth.do" />"> <c:out value="${user.name}"/> | Выйти</a>
+            <p class="nav-link">
+                <c:out value="${user.name}"/> | <a href="<c:url value="/logout.do" />">Выйти</a>
+            </p>
         </li>
     </c:if>
 </ul>

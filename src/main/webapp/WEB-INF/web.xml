@@ -87,6 +87,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>RegServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.RegServlet</servlet-class>
   </servlet>
