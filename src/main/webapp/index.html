@@ -15,7 +15,7 @@
     <p>This is some text.</p>
 </div>
 
-<form action="">
+<form>
     <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" class="form-control" id="name">
@@ -25,22 +25,43 @@
         <input type="text" class="form-control" id="surname">
     </div>
     <div class="form-group">
-        <label class="radio-inline"><input type="radio" name="sex" checked>male</label>
-        <label class="radio-inline"><input type="radio" name="sex">female</label>
+        <label class="radio-inline"><input type="radio" name="gender" checked>male</label>
+        <label class="radio-inline"><input type="radio" name="gender">female</label>
     </div>
     <div class="form-group">
         <label for="description">Description:</label>
         <textarea class="form-control" id="description"></textarea>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
 </form>
+<script>
+    function validate() {
+        let name = $("#name").val();
+        let surname = $("#surname").val();
+        let description = $("#description").val();
+        let error = "";
+        if (name == "") {
+            error += "Enter name.\n";
+        }
+        if (surname == "") {
+            error += "Enter surname.\n";
+        }
+        if (description == "") {
+            error += "Enter description.\n";
+        }
+        if (error != "") {
+            alert(error);
+        }
+        return false;
+    }
+</script>
 <h2 style="margin-top: 40px;">Table</h2>
 <table class="table">
     <thead>
     <tr>
         <th>Name</th>
         <th>Surname</th>
-        <th>Sex</th>
+        <th>gender</th>
         <th>Description</th>
     </tr>
     </thead>
