@@ -32,13 +32,22 @@
         <label for="description">Description:</label>
         <textarea class="form-control" id="description"></textarea>
     </div>
-    <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
+    <button type="button" class="btn btn-default" onclick="return validate();">Validate</button>
+    <button type="button" class="btn btn-default" onclick="return save();">Save</button>
 </form>
 <script>
     function validate() {
         let name = $("#name").val();
         let surname = $("#surname").val();
         let description = $("#description").val();
+        let error = isValid(name, surname, description);
+        if (error != "") {
+            alert(error);
+        }
+        return false;
+    }
+
+    function isValid(name, surname, description) {
         let error = "";
         if (name == "") {
             error += "Enter name.\n";
@@ -49,14 +58,31 @@
         if (description == "") {
             error += "Enter description.\n";
         }
+        return error;
+    }
+
+    function save() {
+        let name = $("#name").val();
+        let surname = $("#surname").val();
+        let gender = $("input[name='gender']:checked").val();
+        let description = $("#description").val();
+        let error = isValid(name, surname, description);
         if (error != "") {
             alert(error);
+            return false;
         }
-        return false;
+        $("#table tr:last").after(
+            "<tr>" +
+                "<td>" + name +"</td>" +
+                "<td>" + surname +"</td>" +
+                "<td>" + gender +"</td>" +
+                "<td>" + description +"</td>" +
+            "</tr>"
+        );
     }
 </script>
 <h2 style="margin-top: 40px;">Table</h2>
-<table class="table">
+<table class="table" id="table">
     <thead>
     <tr>
         <th>Name</th>
@@ -66,12 +92,6 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-    </tr>
     </tbody>
 </table>
 
