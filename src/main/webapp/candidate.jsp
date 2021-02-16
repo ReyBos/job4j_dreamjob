@@ -34,7 +34,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th></th>
                             <th scope="col">Имя</th>
                             <th scope="col">Фото</th>
                             <th></th>
@@ -43,11 +42,6 @@
                     <tbody>
                     <c:forEach var="candidate" items="${candidates}">
                         <tr>
-                            <td>
-                                <a href='<c:url value="/candidate/edit.do?id=${candidate.id}"/>'>
-                                    <i class="fa fa-edit mr-3"></i>
-                                </a>
-                            </td>
                             <td><c:out value="${candidate.name}"/></td>
                             <td>
                                 <c:if test="${not empty candidate.photoName}">
@@ -57,6 +51,9 @@
                                 </c:if>
                             </td>
                             <td>
+                                <a href='<c:url value="/candidate/edit.do?id=${candidate.id}"/>'>
+                                    <i class="fa fa-edit mr-3"></i>
+                                </a>
                                 <a href='<c:url value="/candidate/delete?id=${candidate.id}"/>'>
                                     <i class="fa fa-trash mr-3"></i>
                                 </a>

@@ -34,23 +34,23 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th></th>
                             <th scope="col">Объявления</th>
                             <th scope="col">Описание</th>
                             <th scope="col">Дата создания</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="post" items="${posts}">
                         <tr>
+                            <td><c:out value="${post.name}"/></td>
+                            <td><c:out value="${post.description}"/></td>
+                            <td><c:out value="${post.formattedCreated}"/></td>
                             <td>
                                 <a href='<c:url value="/post/edit.do?id=${post.id}"/>'>
                                     <i class="fa fa-edit mr-3"></i>
                                 </a>
                             </td>
-                            <td><c:out value="${post.name}"/></td>
-                            <td><c:out value="${post.description}"/></td>
-                            <td><c:out value="${post.formattedCreated}"/></td>
                         </tr>
                     </c:forEach>
                     </tbody>

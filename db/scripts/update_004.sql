@@ -1,0 +1,2 @@
+ALTER TABLE candidate ADD COLUMN created TIMESTAMP,
+    ALTER COLUMN created SET DEFAULT now();

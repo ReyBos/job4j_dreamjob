@@ -1,8 +1,8 @@
 package ru.job4j.dream.store;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.commons.dbcp2.BasicDataSource;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Photo;
 import ru.job4j.dream.model.Post;
@@ -10,11 +10,13 @@ import ru.job4j.dream.model.User;
 
 import java.io.InputStream;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class PsqlStore implements Store {
     private static final Logger LOG = LoggerFactory.getLogger(PsqlStore.class.getName());
     private final BasicDataSource pool = new BasicDataSource();
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private PsqlStore() {
         Properties cfg = new Properties();
@@ -51,6 +53,17 @@ public class PsqlStore implements Store {
     public Collection<Post> findAllPosts() {
         Post searchedPost = new Post();
         String sql = "select * from post";
+        BiConsumerException<PreparedStatement, Post> setValues = (statement, post) -> { };
+        return searchPost(searchedPost, sql, setValues);
+    }
+
+    @Override
+    public Collection<Post> findAllPostsBetweenDates(Calendar from, Calendar to) {
+        Post searchedPost = new Post();
+        String fromDate = dateFormat.format(from.getTime());
+        String toDate = dateFormat.format(to.getTime());
+        String sql = "select * from post where created BETWEEN '"
+                + fromDate + "' AND '" + toDate + "';";
         BiConsumerException<PreparedStatement, Post> setValues = (statement, post) -> { };
         return searchPost(searchedPost, sql, setValues);
     }
@@ -97,6 +110,18 @@ public class PsqlStore implements Store {
         Candidate searchedCandidate = new Candidate();
         String sql = "SELECT candidate.*, photo.id AS photo_name FROM candidate "
                 + " LEFT JOIN photo ON candidate.id = photo.candidate_id";
+        BiConsumerException<PreparedStatement, Candidate> setValues = (statement, candidate) -> { };
+        return searchCandidate(searchedCandidate, sql, setValues);
+    }
+
+    @Override
+    public Collection<Candidate> findAllCandidatesBetweenDates(Calendar from, Calendar to) {
+        Candidate searchedCandidate = new Candidate();
+        String fromDate = dateFormat.format(from.getTime());
+        String toDate = dateFormat.format(to.getTime());
+        String sql = "SELECT candidate.*, photo.id AS photo_name FROM candidate "
+                + " LEFT JOIN photo ON candidate.id = photo.candidate_id "
+                + " where created BETWEEN '" + fromDate + "' AND '" + toDate + "';";
         BiConsumerException<PreparedStatement, Candidate> setValues = (statement, candidate) -> { };
         return searchCandidate(searchedCandidate, sql, setValues);
     }

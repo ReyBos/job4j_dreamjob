@@ -5,6 +5,7 @@ import ru.job4j.dream.model.Photo;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 
+import java.util.Calendar;
 import java.util.Collection;
 
 public interface Store {
@@ -13,6 +14,10 @@ public interface Store {
     Collection<Candidate> findAllCandidates();
 
     Collection<User> findAllUsers();
+
+    Collection<Post> findAllPostsBetweenDates(Calendar from, Calendar to);
+
+    Collection<Candidate> findAllCandidatesBetweenDates(Calendar from, Calendar to);
 
     void save(Post post);
 

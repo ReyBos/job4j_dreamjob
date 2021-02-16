@@ -5,6 +5,7 @@ import ru.job4j.dream.model.Photo;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.Map;
@@ -54,6 +55,16 @@ public class MemStore implements Store {
     @Override
     public Collection<User> findAllUsers() {
         return users.values();
+    }
+
+    @Override
+    public Collection<Post> findAllPostsBetweenDates(Calendar from, Calendar to) {
+        return null;
+    }
+
+    @Override
+    public Collection<Candidate> findAllCandidatesBetweenDates(Calendar from, Calendar to) {
+        return null;
     }
 
     @Override
