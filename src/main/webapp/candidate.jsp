@@ -6,58 +6,51 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <title>Dream Job!</title>
 </head>
 <body>
-<div class="container pt-3">
-    <div class="row">
-        <%@ include file="_menu.jsp" %>
-    </div>
-    <div class="row pt-3">
-        <div class="card" style="width: 100%">
-            <div class="card-header">
-                Кандидаты
-            </div>
-            <div class="card-body">
-                <table class="table">
+<div>
+    <%@ include file="_menu.jsp" %>
+    <div class="container row">
+        <div class="row valign-wrapper">
+            <h3 class="col s6 left-align">Кандидаты</h3>
+            <p class="col s6 right-align">
+                <a class="waves-effect waves-light btn" href='<c:url value="/candidate/edit.do" />'>Добавить кандидата</a>
+            </p>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <table class="highlight">
                     <thead>
-                        <tr>
-                            <th scope="col">Имя</th>
-                            <th scope="col">Город</th>
-                            <th scope="col">Фото</th>
-                            <th></th>
-                        </tr>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Город</th>
+                        <th class="center-align">Фото</th>
+                        <th></th>
+                    </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="candidate" items="${candidates}">
                         <tr>
                             <td><c:out value="${candidate.name}"/></td>
                             <td><c:out value="${candidate.cityName}"/></td>
-                            <td>
+                            <td class="center-align">
                                 <c:if test="${not empty candidate.photoName}">
-                                <a href="<c:url value='/candidate/photo?name=${candidate.photoName}'/>">
-                                    <img src="<c:url value='/candidate/photo?name=${candidate.photoName}'/>" width="100px" height="100px"/>
-                                </a>
+                                    <a href="<c:url value='/candidate/photo?name=${candidate.photoName}'/>">
+                                        <img src="<c:url value='/candidate/photo?name=${candidate.photoName}'/>" width="100px" height="100px"/>
+                                    </a>
                                 </c:if>
                             </td>
-                            <td>
+                            <td class="right-align">
                                 <a href='<c:url value="/candidate/edit.do?id=${candidate.id}"/>'>
-                                    <i class="fa fa-edit mr-3"></i>
+                                    <i class="material-icons">edit</i>
                                 </a>
                                 <a href='<c:url value="/candidate/delete?id=${candidate.id}"/>'>
-                                    <i class="fa fa-trash mr-3"></i>
+                                    <i class="material-icons">delete</i>
                                 </a>
                             </td>
                         </tr>

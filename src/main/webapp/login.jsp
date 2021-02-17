@@ -1,51 +1,52 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <title>Dream Job!</title>
 </head>
 <body>
-<div class="container pt-3">
-    <div class="row">
-        <%@ include file="_menu.jsp" %>
-    </div>
-    <div class="row pt-3">
-        <div class="card" style="width: 100%">
-            <div class="card-header">
-                Авторизация
-            </div>
-            <div class="card-body">
-                <form action="<c:url value="/auth.do" />" method="post">
-                    <div class="form-group">
-                        <label>Почта</label>
-                        <input type="text" class="form-control" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label>Пароль</label>
-                        <input type="password" class="form-control" name="password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
-                    <c:if test="${not empty error}">
-                        <div class="alert alert-danger mt-4" role="alert">
-                            <c:out value="${error}"/>
+<div>
+    <%@ include file="_menu.jsp" %>
+    <div class="container row">
+        <div class="col s6 offset-s3">
+            <h4 class="header center-align">Авторизация</h4>
+            <div class="card horizontal">
+                <div class="card-stacked row">
+                    <form class="col s12" action="<c:url value="/auth.do" />" method="post">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input placeholder="" id="email" type="email" name="email" class="validate">
+                                    <label class="active" for="email">Почта</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input placeholder="" id="password" type="password" name="password" class="validate">
+                                    <label class="active" for="password">Пароль</label>
+                                </div>
+                                <c:if test="${not empty error}">
+                                    <span class="helper-text" data-error="wrong" data-success="right">
+                                        <c:out value="${error}"/>
+                                    </span>
+                                </c:if>
+                            </div>
                         </div>
-                    </c:if>
-                </form>
+                        <div class="card-action right-align">
+                            <button type="submit" class="waves-effect waves-light btn">
+                                войти<i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

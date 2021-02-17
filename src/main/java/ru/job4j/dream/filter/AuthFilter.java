@@ -22,6 +22,7 @@ public class AuthFilter implements Filter {
                 || uri.endsWith("ajax.html")
                 || uri.endsWith("/greet")
                 || uri.endsWith("/city")
+                || uri.endsWith("css/materialize.min.css")
         ) {
             chain.doFilter(sreq, sresp);
             return;
