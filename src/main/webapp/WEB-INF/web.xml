@@ -78,6 +78,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>CandidatePhotoDeleteServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.CandidatePhotoDeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CandidatePhotoDeleteServlet</servlet-name>
+    <url-pattern>/candidate/photo/delete</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>AuthServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.AuthServlet</servlet-class>
   </servlet>

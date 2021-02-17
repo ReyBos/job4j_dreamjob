@@ -34,7 +34,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Объявления</th>
+                            <th scope="col">Название</th>
                             <th scope="col">Описание</th>
                             <th scope="col">Дата создания</th>
                             <th></th>

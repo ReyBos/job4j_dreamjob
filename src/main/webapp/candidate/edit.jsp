@@ -88,7 +88,10 @@
                 </div>
                 <div class="col-5">
                     <c:if test="${not empty candidate.photoName}">
-                        <img src="<c:url value='/candidate/photo?name=${candidate.photoName}'/>" width="100px" height="100px"/>
+                        <p class="card-text">
+                            <img src="<c:url value='/candidate/photo?name=${candidate.photoName}'/>" width="100px" height="100px"/>
+                        </p>
+                        <a class="btn btn-primary" href="<c:url value='/candidate/photo/delete?id=${candidate.photoName}&candidate_id=${candidate.id}'/>">Удалить фото</a>
                     </c:if>
                     <c:if test="${empty candidate.photoName}">
                         <form action="<c:url value='/candidate/photo?id=${candidate.id}'/>" method="post" enctype="multipart/form-data">

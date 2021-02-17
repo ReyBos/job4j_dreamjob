@@ -5,6 +5,10 @@ public class Photo {
     private String name;
     private int candidateId;
 
+    public Photo(int id) {
+        this.id = id;
+    }
+
     public Photo(String name, int candidateId) {
         this.id = 0;
         this.name = name;

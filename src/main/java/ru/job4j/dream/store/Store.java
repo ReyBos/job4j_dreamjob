@@ -30,6 +30,8 @@ public interface Store {
 
     void delete(User user);
 
+    void delete(Photo photo);
+
     Post findPostById(int id);
 
     Candidate findCandidateById(int id);
