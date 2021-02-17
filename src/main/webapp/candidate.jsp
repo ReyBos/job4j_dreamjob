@@ -35,6 +35,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Имя</th>
+                            <th scope="col">Город</th>
                             <th scope="col">Фото</th>
                             <th></th>
                         </tr>
@@ -43,6 +44,7 @@
                     <c:forEach var="candidate" items="${candidates}">
                         <tr>
                             <td><c:out value="${candidate.name}"/></td>
+                            <td><c:out value="${candidate.cityName}"/></td>
                             <td>
                                 <c:if test="${not empty candidate.photoName}">
                                 <a href="<c:url value='/candidate/photo?name=${candidate.photoName}'/>">

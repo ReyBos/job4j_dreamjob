@@ -21,6 +21,7 @@ public class AuthFilter implements Filter {
                 || uri.endsWith("reg.do")
                 || uri.endsWith("ajax.html")
                 || uri.endsWith("/greet")
+                || uri.endsWith("/city")
         ) {
             chain.doFilter(sreq, sresp);
             return;

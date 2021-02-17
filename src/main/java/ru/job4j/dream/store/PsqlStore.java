@@ -3,10 +3,7 @@ package ru.job4j.dream.store;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.job4j.dream.model.Candidate;
-import ru.job4j.dream.model.Photo;
-import ru.job4j.dream.model.Post;
-import ru.job4j.dream.model.User;
+import ru.job4j.dream.model.*;
 
 import java.io.InputStream;
 import java.sql.*;
@@ -108,8 +105,10 @@ public class PsqlStore implements Store {
     @Override
     public Collection<Candidate> findAllCandidates() {
         Candidate searchedCandidate = new Candidate();
-        String sql = "SELECT candidate.*, photo.id AS photo_name FROM candidate "
-                + " LEFT JOIN photo ON candidate.id = photo.candidate_id";
+        String sql = "SELECT candidate.*, photo.id AS photo_name, city.name AS city_name "
+                + " FROM candidate "
+                + " LEFT JOIN photo ON candidate.id = photo.candidate_id "
+                + " LEFT JOIN city ON candidate.city_id = city.id";
         BiConsumerException<PreparedStatement, Candidate> setValues = (statement, candidate) -> { };
         return searchCandidate(searchedCandidate, sql, setValues);
     }
@@ -119,9 +118,11 @@ public class PsqlStore implements Store {
         Candidate searchedCandidate = new Candidate();
         String fromDate = dateFormat.format(from.getTime());
         String toDate = dateFormat.format(to.getTime());
-        String sql = "SELECT candidate.*, photo.id AS photo_name FROM candidate "
+        String sql = "SELECT candidate.*, photo.id AS photo_name, city.name AS city_name "
+                + " FROM candidate "
                 + " LEFT JOIN photo ON candidate.id = photo.candidate_id "
-                + " where created BETWEEN '" + fromDate + "' AND '" + toDate + "';";
+                + " LEFT JOIN city ON candidate.city_id = city.id"
+                + " WHERE created BETWEEN '" + fromDate + "' AND '" + toDate + "';";
         BiConsumerException<PreparedStatement, Candidate> setValues = (statement, candidate) -> { };
         return searchCandidate(searchedCandidate, sql, setValues);
     }
@@ -129,8 +130,11 @@ public class PsqlStore implements Store {
     @Override
     public Candidate findCandidateById(int id) {
         Candidate searchedCandidate = new Candidate(id);
-        String sql = "SELECT candidate.*, photo.id AS photo_name FROM candidate "
-                + " LEFT JOIN photo ON candidate.id = photo.candidate_id WHERE candidate.id = ?";
+        String sql = "SELECT candidate.*, photo.id AS photo_name, city.name AS city_name "
+                + " FROM candidate "
+                + " LEFT JOIN photo ON candidate.id = photo.candidate_id "
+                + " LEFT JOIN city ON candidate.city_id = city.id"
+                + " WHERE candidate.id = ?";
         BiConsumerException<PreparedStatement, Candidate> setValues = (statement, candidate) -> {
             statement.setInt(1, candidate.getId());
         };
@@ -153,7 +157,9 @@ public class PsqlStore implements Store {
                     candidates.add(new Candidate(
                             resultSet.getInt("id"),
                             resultSet.getString("name"),
-                            resultSet.getString("photo_name")
+                            resultSet.getString("photo_name"),
+                            resultSet.getInt("city_id"),
+                            resultSet.getString("city_name")
                     ));
                 }
             }
@@ -218,6 +224,27 @@ public class PsqlStore implements Store {
     }
 
     @Override
+    public Collection<City> findAllCities() {
+        List<City> cities = new ArrayList<>();
+        String sql = "SELECT * FROM city;";
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement(sql)
+        ) {
+            try (ResultSet resultSet = ps.executeQuery()) {
+                while (resultSet.next()) {
+                    cities.add(new City(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            LOG.error("Error", e);
+        }
+        return cities;
+    }
+
+    @Override
     public void save(Post post) {
         if (post.getId() == 0) {
             create(post);
@@ -272,13 +299,14 @@ public class PsqlStore implements Store {
     }
 
     private void create(Candidate candidate) {
-        String sql = "insert into candidate(name) values (?)";
+        String sql = "insert into candidate(name, city_id) values (?, ?)";
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement(
                      sql, PreparedStatement.RETURN_GENERATED_KEYS
              )
         ) {
             ps.setString(1, candidate.getName());
+            ps.setInt(2, candidate.getCityId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -291,12 +319,13 @@ public class PsqlStore implements Store {
     }
 
     private void update(Candidate candidate) {
-        String sql = "update candidate set name = ? where id = ?";
+        String sql = "update candidate set name = ?, city_id = ? where id = ?";
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement(sql)
         ) {
             ps.setString(1, candidate.getName());
-            ps.setInt(2, candidate.getId());
+            ps.setInt(2, candidate.getCityId());
+            ps.setInt(3, candidate.getId());
             ps.execute();
         } catch (Exception e) {
             LOG.error("Error", e);

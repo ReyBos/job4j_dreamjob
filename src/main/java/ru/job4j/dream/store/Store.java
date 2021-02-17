@@ -1,9 +1,6 @@
 package ru.job4j.dream.store;
 
-import ru.job4j.dream.model.Candidate;
-import ru.job4j.dream.model.Photo;
-import ru.job4j.dream.model.Post;
-import ru.job4j.dream.model.User;
+import ru.job4j.dream.model.*;
 
 import java.util.Calendar;
 import java.util.Collection;
@@ -14,6 +11,8 @@ public interface Store {
     Collection<Candidate> findAllCandidates();
 
     Collection<User> findAllUsers();
+
+    Collection<City> findAllCities();
 
     Collection<Post> findAllPostsBetweenDates(Calendar from, Calendar to);
 

@@ -6,6 +6,8 @@ public class Candidate {
     private int id;
     private String name;
     private String photoName;
+    private int cityId;
+    private String cityName;
 
     public Candidate() {
         this.id = 0;
@@ -22,10 +24,24 @@ public class Candidate {
         this.name = name;
     }
 
+    public Candidate(int id, String name, int cityId) {
+        this.id = id;
+        this.name = name;
+        this.cityId = cityId;
+    }
+
     public Candidate(int id, String name, String photoName) {
         this.id = id;
         this.name = name;
         this.photoName = photoName;
+    }
+
+    public Candidate(int id, String name, String photoName, int cityId, String cityName) {
+        this.id = id;
+        this.name = name;
+        this.photoName = photoName;
+        this.cityId = cityId;
+        this.cityName = cityName;
     }
 
     public int getId() {
@@ -50,6 +66,22 @@ public class Candidate {
 
     public void setPhotoName(String photoName) {
         this.photoName = photoName;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     @Override
