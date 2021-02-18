@@ -21,7 +21,7 @@ public class CandidateDeleteServlet extends HttpServlet {
         String id = req.getParameter("id");
         if (id != null) {
             Candidate candidate = PsqlStore.instOf().findCandidateById(Integer.parseInt(id));
-            if (!candidate.getPhotoName().equals("")) {
+            if (candidate.getPhotoName() != null) {
                 String folderName = "images" + File.separator + "photo";
                 File file = new File(folderName + File.separator + candidate.getPhotoName());
                 if (file.delete()) {

@@ -49,8 +49,10 @@ public class CandidatePhotoServlet extends HttpServlet {
         factory.setRepository(repository);
         ServletFileUpload upload = new ServletFileUpload(factory);
         try {
+            String folderName = "images" + File.separator + "photo";
+            Files.createDirectories(Paths.get(folderName));
             List<FileItem> items = upload.parseRequest(req);
-            File folder = new File("images" + File.separator + "photo");
+            File folder = new File(folderName);
             for (FileItem item : items) {
                 if (!item.isFormField()) {
                     String candidateId = req.getParameter("id");

@@ -15,7 +15,7 @@ public class RegServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         if (req.getSession().getAttribute("user") != null) {
-            resp.sendRedirect(req.getContextPath() + "/post.do");
+            resp.sendRedirect(req.getContextPath() + "/index.do");
         }
         req.getRequestDispatcher("reg.jsp").forward(req, resp);
     }
@@ -35,7 +35,7 @@ public class RegServlet extends HttpServlet {
         } else {
             HttpSession sc = req.getSession();
             sc.setAttribute("user", user);
-            resp.sendRedirect(req.getContextPath() + "/post.do");
+            resp.sendRedirect(req.getContextPath() + "/index.do");
         }
     }
 }

@@ -13,7 +13,17 @@
         </ul>
     </li>
     <li>
-        <a href="#links">Сборка проекта</a>
+        <a href="#build">Сборка</a>
+    </li>
+    <li>
+        <a href="#usage">Использование</a>
+        <ul>
+            <li><a href="#reg">Регистрация/авторизация</a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+        </ul>
     </li>
     <li>
         <a href="#links">Полезные ссылки</a>
@@ -24,7 +34,7 @@
 </ul>
 
 <h2><a name="about">О проекте</a></h2>
-<h4><a name="description">Описание</a> <a href="#menu">:arrow_up:</a></h4>
+<h4><a name="description">Описание</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h4>
 <p>
     Проект для изучения Java EE.
 </p>
@@ -33,7 +43,7 @@
     В системе будут два типа пользователей: кандидаты и менеджеры. Кандидаты будут публиковать резюме. Менеджеры будут публиковать вакансии о работе.<br>
     Кандидаты могут откликнуться на вакансию. Кадровик может пригласить на вакансию кандидата.
 </p>
-<h4><a name="technologies">Технологии</a> <a href="#menu">:arrow_up:</a></h4>
+<h4><a name="technologies">Технологии</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h4>
 <ul>
     <li>Java 14</li>
     <li>Java EE Servlets, JSP, JSTL</li>
@@ -43,7 +53,7 @@
     <li>HTML, JavaScript, jQuery, JSON</li>
     <li><a href="https://materializecss.com">Material Design library</a></li>
 </ul>
-<h4><a name="structure">Структура</a> <a href="#menu">:arrow_up:</a></h4>
+<h4><a name="structure">Структура</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h4>
 <pre><code>.
 |-db
 |---scripts
@@ -63,7 +73,7 @@
 |-----java/ru/job4j/dream
 └─------------servlet</code></pre>
 
-<h2><a name="build">Сборка проекта</a> <a href="#menu">:arrow_up:</a></h2>
+<h2><a name="build">Сборка</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h2>
 <ol>
     <li>
         Для успешной сборки и работы проекта на вашем компьютере должны быть установлены:
@@ -83,9 +93,9 @@
         перейдите в корень проекта
     </li>
     <li>
-        Добавьте настройки для доступа к базе данных, для этого внесите соответствующие изменения в файле<br>
+        Добавьте настройки для доступа к базе данных, для этого внесите соответствующие изменения в файле 
         <code>src/main/resources/db.properties</code><br>
-        и в файле конфигурации проекта <code>pom.xml</code> в разделе
+        и в файле конфигурации проекта <code>pom.xml</code>
     
 ``` 
 <profile>   
@@ -100,10 +110,9 @@
 ```
 </li>
     <li>
-        Соберите проект выполнив команду в корне проекта<br>
-        <code>mvn install -Pproduction</code><br>
-        в случае успешной сборки появится файл <br>
-        <code>target/job4j_dreamjob-1.0.war</code><br>
+        Выполните команду <code>mvn install -Pproduction</code> в корне проекта для его сборки<br>
+        Будет выполнена миграция БД с помощью Liquibase.<br>
+        В случае успешной сборки появится файл <code>target/job4j_dreamjob-1.0.war</code><br>
         переименуйте его в <code>dreamjob.war</code>
     </li>
     <li>
@@ -115,7 +124,29 @@
     </li>
 </ol>
 
-<h2><a name="links">Полезные ссылки</a> <a href="#menu">:arrow_up:</a></h2>
+<h2><a name="usage">Использование</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h2>
+<p>
+    Основной функционал приложения доступен зарегистрированным пользователям. Новым клиентам доступен раздел регистрации и авторизации. 
+    Это достигается за счет фильтрации всех запросов в <code>ru.job4j.dream.filter.AuthFilter</code>. Сам фильтр (и все сервлеты) подлкючается
+    к проекту в <code>src/main/webapp/WEB-INF/web.xml</code><br>
+    Все операции сохранения/изменения/получения пользовательских данных описаны в интерфейсе <code>ru.job4j.dream.store.Store</code>
+</p>
+<h4><a name="reg">Регистрация/авторизация</a></h4>
+<p>
+    За обработку запросов на регистрацию и авторизацию отвечают сервлеты <code>ru.job4j.dream.servlet.RegServlet</code> и <code>ru.job4j.dream.servlet.AuthServlet</code>. 
+    Модель пользователя описана в <code>ru.job4j.dream.model.User</code> 
+</p>
+<p align="center">
+  <img src="images/1.png" height="400" title="регистрация">
+</p>
+<p>
+    После успешной авторизации/регистрации пользователь попадает на главную страницу <code>/index.do</code>. Здесь отображаются свежие вакансии и новые кандидаты что были добавлены за текущий день.
+</p>
+<p align="center">
+  <img src="images/2.png" height="400" title="главная страница">
+</p>
+
+<h2><a name="links">Полезные ссылки</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h2>
 <p>Ресурсы которые были полезны при создании проекта</p>
 <ul>
     <li>
@@ -144,7 +175,7 @@
     </li>-->
 </ul>
 
-<h2><a name="contact">Контакты</a> <a href="#menu">:arrow_up:</a></h2>
+<h2><a name="contact">Контакты</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h2>
 <p>Связаться со мной по всем интересующим вопросам вы можете здесь:</p>
 
 [![alt-text](https://img.shields.io/badge/-linkedin-283e4a?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/reybos/)&nbsp;&nbsp;
