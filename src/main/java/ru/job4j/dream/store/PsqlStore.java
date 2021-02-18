@@ -431,6 +431,22 @@ public class PsqlStore implements Store {
     }
 
     @Override
+    public void delete(Post post) {
+        if (post.getId() == 0) {
+            return;
+        }
+        String sql = "delete from post where id = ?";
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement(sql)
+        ) {
+            ps.setInt(1, post.getId());
+            ps.execute();
+        } catch (Exception e) {
+            LOG.error("Error", e);
+        }
+    }
+
+    @Override
     public void delete(Photo photo) {
         if (photo.getId() == 0) {
             return;

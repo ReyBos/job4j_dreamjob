@@ -112,6 +112,11 @@ public class MemStore implements Store {
     }
 
     @Override
+    public void delete(Post post) {
+        posts.remove(post.getId());
+    }
+
+    @Override
     public void delete(Photo photo) {
 
     }

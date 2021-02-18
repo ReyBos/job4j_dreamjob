@@ -25,6 +25,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>PostDeleteServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.PostDeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostDeleteServlet</servlet-name>
+    <url-pattern>/post/delete</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>PostEditServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.PostEditServlet</servlet-class>
   </servlet>
