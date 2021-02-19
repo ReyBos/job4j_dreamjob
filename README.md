@@ -169,6 +169,10 @@
         <strong><a href="https://stackoverflow.com/questions/24623731/where-is-catalina-base-webapps-folder-for-tomcat-8-on-mac">link</a></strong>
         - расположение папки webapps (Tomcat)
     </li>
+    <li>
+        <strong><a href="https://sprosi.pro/questions/905924/zapusk-servera-tomcat-na-dvuh-raznyih-portah">link</a></strong>
+        - запуск Tomcat на разных портах
+    </li>
     <!--<li>
         <strong><a href="">link</a></strong>
         - сервлеты и Ajax
