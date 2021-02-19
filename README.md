@@ -18,11 +18,11 @@
     <li>
         <a href="#usage">Использование</a>
         <ul>
-            <li><a href="#reg">Регистрация/авторизация</a></li>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
+            <li><a href="#info">Общая информация</a></li>
+            <li><a href="#reg_page">Регистрация/авторизация</a></li>
+            <li><a href="#main_page">Главная</a></li>
+            <li><a href="#post_page">Вакансии</a></li>
+            <li><a href="#candidate_page">Кандидаты</a></li>
         </ul>
     </li>
     <li>
@@ -33,7 +33,7 @@
     </li>
 </ul>
 
-<h2><a name="about">О проекте</a></h2>
+<h2><a name="about">О проекте</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h2>
 <h4><a name="description">Описание</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h4>
 <p>
     Проект для изучения Java EE.
@@ -41,7 +41,7 @@
 <p>
     Это приложение - биржа работы.<br>
     В системе будут два типа пользователей: кандидаты и менеджеры. Кандидаты будут публиковать резюме. Менеджеры будут публиковать вакансии о работе.<br>
-    Кандидаты могут откликнуться на вакансию. Кадровик может пригласить на вакансию кандидата.
+    Кандидаты могут откликнуться на вакансию. Менеджер может пригласить на вакансию кандидата.
 </p>
 <h4><a name="technologies">Технологии</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h4>
 <ul>
@@ -125,25 +125,103 @@
 </ol>
 
 <h2><a name="usage">Использование</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h2>
+
+<h3><a name="info">Общая информация</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h3>
 <p>
     Основной функционал приложения доступен зарегистрированным пользователям. Новым клиентам доступен раздел регистрации и авторизации. 
-    Это достигается за счет фильтрации всех запросов в <code>ru.job4j.dream.filter.AuthFilter</code>. Сам фильтр (и все сервлеты) подлкючается
+    Это достигается за счет фильтрации всех запросов в <code>ru.job4j.dream.filter.AuthFilter</code>. Сам фильтр (и все сервлеты) подключается
     к проекту в <code>src/main/webapp/WEB-INF/web.xml</code><br>
     Все операции сохранения/изменения/получения пользовательских данных описаны в интерфейсе <code>ru.job4j.dream.store.Store</code>
 </p>
-<h4><a name="reg">Регистрация/авторизация</a></h4>
+
+<h3><a name="reg_page">Регистрация/авторизация</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h3>
+<dl>
+  <dt>Адреса</dt>
+  <dd>
+      <code>/reg.do</code> <code>/auth.do</code>
+  </dd>
+
+  <dt>Сервлеты</dt>
+  <dd>
+    <code>ru.job4j.dream.servlet.RegServlet</code> <code>ru.job4j.dream.servlet.AuthServlet</code>
+  </dd>
+  
+  <dt>Модели</dt>
+  <dd>
+    <code>ru.job4j.dream.model.User</code>
+  </dd>
+</dl>
 <p>
-    За обработку запросов на регистрацию и авторизацию отвечают сервлеты <code>ru.job4j.dream.servlet.RegServlet</code> и <code>ru.job4j.dream.servlet.AuthServlet</code>. 
-    Модель пользователя описана в <code>ru.job4j.dream.model.User</code> 
+    Не авторизованному пользователю доступны только эти две страницы. 
 </p>
 <p align="center">
   <img src="images/1.png" height="400" title="регистрация">
 </p>
+
+<h3><a name="main_page">Главная</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h3>
+<dl>
+  <dt>Адреса</dt>
+  <dd><code>/index.do</code></dd>
+
+  <dt>Сервлеты</dt>
+  <dd>
+    <code>ru.job4j.dream.servlet.IndexServlet</code> <code>ru.job4j.dream.servlet.LogoutServlet</code>
+  </dd>
+  
+  <dt>Модели</dt>
+  <dd>
+  </dd>
+</dl>
 <p>
-    После успешной авторизации/регистрации пользователь попадает на главную страницу <code>/index.do</code>. Здесь отображаются свежие вакансии и новые кандидаты что были добавлены за текущий день.
+    После успешной авторизации/регистрации пользователь попадает на главную страницу. Здесь отображаются свежие вакансии и новые кандидаты что были добавлены за текущий день. Для выхода из приложения нужно кликнуть на кнопку "выйти" в верхнем меню.
 </p>
 <p align="center">
   <img src="images/2.png" height="400" title="главная страница">
+</p>
+
+<h3><a name="post_page">Вакансии</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h3>
+<dl>
+  <dt>Адреса</dt>
+  <dd><code>/post.do</code> <code>/post/edit.do</code></dd>
+
+  <dt>Сервлеты</dt>
+  <dd>
+    <code>ru.job4j.dream.servlet.PostServlet</code> <code>ru.job4j.dream.servlet.PostEditServlet</code> <code>ru.job4j.dream.servlet.PostDeleteServlet</code>
+  </dd>
+  
+  <dt>Модели</dt>
+  <dd>
+    <code>ru.job4j.dream.model.Post</code>
+  </dd>
+</dl>
+<p>
+    Пользователям доступна возможность добавлять/изменять/удалять вакансии. В вакансии возможно добавить заголовок и описание.
+</p>
+<p align="center">
+  <img src="images/3.png" height="400" title="вакансия">
+</p>
+
+<h3><a name="candidate_page">Кандидаты</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h3>
+<dl>
+  <dt>Адреса</dt>
+  <dd><code>/candidate.do</code> <code>/candidate/edit.do</code></dd>
+
+  <dt>Сервлеты</dt>
+  <dd>
+    <code>ru.job4j.dream.servlet.CandidateServlet</code> <code>ru.job4j.dream.servlet.CandidateEditServlet</code> <code>ru.job4j.dream.servlet.CandidateDeleteServlet</code>
+    <code>ru.job4j.dream.servlet.CandidatePhotoServlet</code> <code>ru.job4j.dream.servlet.CandidatePhotoDeleteServlet</code> <code>ru.job4j.dream.servlet.CityServlet</code>
+  </dd>
+  
+  <dt>Модели</dt>
+  <dd>
+    <code>ru.job4j.dream.model.Candidate</code> <code>ru.job4j.dream.model.Photo</code> <code>ru.job4j.dream.model.City</code>
+  </dd>
+</dl>
+<p>
+    Пользователям доступна возможность добавлять/изменять/удалять кандидатов. У кандидата должно быть имя и город (что бы добавить город в список нужно создать новую миграцию, пример можно посмотреть в <code>db/scripts/update_006.sql</code>). После того как кандидат был создан, ему можно добавить одну фотографию. При удалении кандидата удаляется и его фотография. 
+</p>
+<p align="center">
+  <img src="images/5.png" height="400" title="кандидат">
 </p>
 
 <h2><a name="links">Полезные ссылки</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h2>
