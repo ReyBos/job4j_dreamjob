@@ -7,17 +7,18 @@ import java.io.IOException;
 
 public class CORSFilter implements Filter {
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
-        ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "*");
-        ((HttpServletResponse) servletResponse).addHeader(
+    public void doFilter(ServletRequest sreq, ServletResponse sresp, FilterChain chain)
+            throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) sreq;
+        ((HttpServletResponse) sresp).addHeader("Access-Control-Allow-Origin", "*");
+        ((HttpServletResponse) sresp).addHeader(
                 "Access-Control-Allow-Methods", "GET, OPTIONS, HEAD, PUT, POST"
         );
-        HttpServletResponse resp = (HttpServletResponse) servletResponse;
+        HttpServletResponse resp = (HttpServletResponse) sresp;
         if (request.getMethod().equals("OPTIONS")) {
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
             return;
         }
-        chain.doFilter(request, servletResponse);
+        chain.doFilter(request, sresp);
     }
 }
