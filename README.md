@@ -10,6 +10,7 @@
             <li><a href="#description">Описание</a></li>
             <li><a href="#technologies">Технологии</a></li>
             <li><a href="#structure">Структура</a></li>
+            <li><a href="#scheme">Схема БД</a></li>
         </ul>
     </li>
     <li>
@@ -72,6 +73,11 @@
 |---test
 |-----java/ru/job4j/dream
 └─------------servlet</code></pre>
+
+<h4><a name="scheme">Схема БД</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h4>
+<p align="center">
+  <img src="images/6.png" height="400" title="схема БД">
+</p>
 
 <h2><a name="build">Сборка</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h2>
 <ol>
