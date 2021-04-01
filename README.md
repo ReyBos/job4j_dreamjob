@@ -17,7 +17,7 @@
         <a href="#build">Сборка</a>
     </li>
     <li>
-        <a href="#usage">Использование</a>
+        <a href="#usage">Пользовательский интерфейс</a>
         <ul>
             <li><a href="#info">Общая информация</a></li>
             <li><a href="#reg_page">Регистрация/авторизация</a></li>
@@ -130,7 +130,7 @@
     </li>
 </ol>
 
-<h2><a name="usage">Использование</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h2>
+<h2><a name="usage">Пользовательский интерфейс</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h2>
 
 <h3><a name="info">Общая информация</a>&nbsp;&nbsp;<a href="#menu">&#9650;</a></h3>
 <p>
